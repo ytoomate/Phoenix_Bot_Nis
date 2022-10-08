@@ -1,20 +1,21 @@
 // swift-tools-version:5.6
 import PackageDescription
 
-let package = Package(
-    name: "tgbot",
+let package = Package(name: "tgbot",
     platforms: [
-       .macOS(.v12)
+        .macOS(.v12)
     ],
     dependencies: [
         // 💧 A server-side Swift web framework.
         .package(url: "https://github.com/vapor/vapor.git", from: "4.0.0"),
+        .package(name: "telegram-vapor-bot", url: "https://github.com/nerzh/telegram-vapor-bot", .upToNextMajor(from: "1.2.4")),
     ],
     targets: [
         .target(
             name: "App",
             dependencies: [
-                .product(name: "Vapor", package: "vapor")
+                .product(name: "Vapor", package: "vapor"),
+                .product(name: "telegram-vapor-bot", package: "telegram-vapor-bot"),
             ],
             swiftSettings: [
                 // Enable better optimizations when building in Release configuration. Despite the use of
