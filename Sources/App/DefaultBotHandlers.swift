@@ -46,7 +46,7 @@ final class DefaultBotHandlers {
 2.     Структура самоуправления.
 3.     У меня есть предложение.
 """, bot: bot)}
-        let handler1 = TGMessageHandler(filters: .regexp(pattern: "1")) {update, bot in
+        let handler1 = TGMessageHandler(filters: .regexp(pattern: "2")) {update, bot in
                 try update.message?.reply(text: "1. Кто мы ? Мы - тигры, ррр", bot: bot)
             }
         let handler3 = TGMessageHandler(filters: .regexp(pattern: "3")) {update, bot in
