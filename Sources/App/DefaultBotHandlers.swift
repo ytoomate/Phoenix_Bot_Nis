@@ -20,9 +20,14 @@ final class DefaultBotHandlers {
 
     private static func defaultHandler(app: Vapor.Application, bot: TGBotPrtcl) {
         let handler = TGMessageHandler(filters: (.all && !.command.names(["/ping", "/show_buttons"]))) { update, bot in
-            let params: TGSendMessageParams = .init(chatId: .chat(update.message!.chat.id), text: " ")
-            try bot.sendMessage(params: params)
-           
+                //  let params: TGSendMessageParams = .init(chatId: .chat(update.message!.chat.id), text: "Принято")
+       //     try bot.sendMessage(params: params)
+            if update.message?.text != nil {
+                print(update.message?.text!)
+            } else {
+                print("Error")
+            }
+            
         }
         bot.connection.dispatcher.add(handler)
         
@@ -37,15 +42,21 @@ final class DefaultBotHandlers {
 
 Я могу ответить на любые интересующие вас вопросы, выберите что вы хотите спросить:
 
-/1. Популярные вопросы.
-/2. Структура самоуправления.
-/3. У меня есть предложение.
+1.      Популярные вопросы.
+2.     Структура самоуправления.
+3.     У меня есть предложение.
 """, bot: bot)}
-        let handler1 = TGCommandHandler(commands: ["/1"]) {update, bot in
+        let handler1 = TGMessageHandler(filters: .regexp(pattern: "1")) {update, bot in
                 try update.message?.reply(text: "1. Кто мы ? Мы - тигры, ррр", bot: bot)
             }
+        let handler3 = TGMessageHandler(filters: .regexp(pattern: "3")) {update, bot in
+            try update.message?.reply(text: "Следующие ваши сообщения будут обязательно рассмотрены и приняты 😇", bot: bot)
+         //   let params1: TGSendMessageParams = .init(chatId: .chat(update.message!.chat.id), text: "Принято!")
+          //  try bot.sendMessage(params: params1)
+        }
         bot.connection.dispatcher.add(handler)
         bot.connection.dispatcher.add(handler1)
+        bot.connection.dispatcher.add(handler3)
     }
 
     private static func commandShowButtonsHandler(app: Vapor.Application, bot: TGBotPrtcl) {
