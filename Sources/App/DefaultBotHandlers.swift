@@ -42,15 +42,15 @@ final class DefaultBotHandlers {
 
 Я могу ответить на любые интересующие вас вопросы, выберите что вы хотите спросить:
 
-1.      Популярные вопросы.
+1.      Книга Жалоб.
 2.     Структура самоуправления.
 3.     У меня есть предложение.
 """, bot: bot)}
-        let handler1 = TGMessageHandler(filters: .regexp(pattern: "2")) {update, bot in
-                try update.message?.reply(text: "1. Кто мы ? Мы - тигры, ррр", bot: bot)
+        let handler1 = TGMessageHandler(filters: .regexp(pattern: "1")) {update, bot in
+                try update.message?.reply(text: "1. Следущие ваши сообщения будут обязательно записаны и рассмотрены ! 🤠", bot: bot)
             }
         let handler3 = TGMessageHandler(filters: .regexp(pattern: "3")) {update, bot in
-            try update.message?.reply(text: "Следующие ваши сообщения будут обязательно рассмотрены и приняты 😇", bot: bot)
+            try update.message?.reply(text: "Следующие ваши сообщения будут обязательно рассмотрены и приняты ! 😇", bot: bot)
          //   let params1: TGSendMessageParams = .init(chatId: .chat(update.message!.chat.id), text: "Принято!")
           //  try bot.sendMessage(params: params1)
         }
