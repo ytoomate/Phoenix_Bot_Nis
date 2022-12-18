@@ -23,7 +23,7 @@ final class DefaultBotHandlers {
             //  let params: TGSendMessageParams = .init(chatId: .chat(update.message!.chat.id), text: "Принято")
             //     try bot.sendMessage(params: params)
             if update.message?.text != nil {
-                print("Телеграм-Бот:   \(update.message?.text ?? "Error")")
+                print("litl nis bot:   \(update.message?.text ?? "Error")")
             } else {
                 print("Error")
             }
