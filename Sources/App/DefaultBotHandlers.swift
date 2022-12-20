@@ -23,7 +23,7 @@ final class DefaultBotHandlers {
             let date = Date()
             let format = DateFormatter()
             
-            format.timeZone = .current
+            format.timeZone = TimeZone(identifier: "UTC +6")
             format.timeStyle = .long
             format.dateStyle = .short
             
