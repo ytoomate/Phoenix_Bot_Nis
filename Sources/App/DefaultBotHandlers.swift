@@ -20,10 +20,16 @@ final class DefaultBotHandlers {
     
     private static func defaultHandler(app: Vapor.Application, bot: TGBotPrtcl) {
         let handler = TGMessageHandler(filters: (.all && !.command.names(["/ping", "/show_buttons"]))) { update, bot in
-            //  let params: TGSendMessageParams = .init(chatId: .chat(update.message!.chat.id), text: "Принято")
-            //     try bot.sendMessage(params: params)
+            let date = Date()
+            let format = DateFormatter()
+            
+            format.timeZone = .current
+            format.timeStyle = .long
+            format.dateStyle = .short
+            
+            
             if update.message?.text != nil {
-                print("litl nis bot:   \(update.message?.text ?? "Error")")
+                print("\(format.string(from: date)); litl nis bot:   \(update.message?.text ?? "Error")")
             } else {
                 print("Error")
             }
