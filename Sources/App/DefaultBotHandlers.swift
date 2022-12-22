@@ -59,9 +59,10 @@ final class DefaultBotHandlers {
             if update.message?.text != nil {
                // print("\(format.string(from: date)); litl nis bot:   \(update.message?.text ?? "Error")")
                 do {
-                    let dir: URL = FileManager.default.urls(for: .desktopDirectory, in: .userDomainMask).last! as URL
+                    let dir: URL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).last! as URL
                      let url = dir.appendingPathComponent("logFile.txt")
-                     try "\(format.string(from: date)); litl nis bot:   \(update.message?.text ?? "Error")".appendLineToURL(fileURL: url as URL)
+                    
+                    try "\(format.string(from: date)); litl nis bot:   \(update.message?.text ?? "Error")".appendLineToURL(fileURL: url.standardized as URL)
         
                  }
                  catch {
