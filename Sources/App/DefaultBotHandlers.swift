@@ -8,7 +8,6 @@
 import Foundation
 import Vapor
 import telegram_vapor_bot
-
 //MARK:- Extension for String
 extension String {
     func appendLineToURL(fileURL: URL) throws {
@@ -59,15 +58,22 @@ final class DefaultBotHandlers {
             if update.message?.text != nil {
                // print("\(format.string(from: date)); litl nis bot:   \(update.message?.text ?? "Error")")
                 do {
-                    let dir: URL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).last! as URL
-                     let url = dir.appendingPathComponent("logFile.txt")
+                    let workPath = DirectoryConfiguration.detect().workingDirectory
+                    var workPathURL = URL(fileURLWithPath: workPath)
                     
+                  //  let dir: URL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).last! as URL
+                     let url = workPathURL.appendingPathComponent("logFile.txt")
+
                     try "\(format.string(from: date)); litl nis bot:   \(update.message?.text ?? "Error")".appendLineToURL(fileURL: url.standardized as URL)
-        
                  }
                  catch {
-                     print("Something went worng:  \(error)")
+                     print("Something went wrong:  \(error)")
                  }
+//                func workingDirectoryURL(with components: [String] = []) throws -> URL {
+//
+//                    components.forEach { component in workPathURL = workPathURL.appendingPathComponent(component) }
+//                    return workPathURL
+//                }
             } else {
                 print("Error")
             }
@@ -108,10 +114,10 @@ final class DefaultBotHandlers {
 9. Что делать если появились
     трудности в учёбе?
 """, bot: bot)}
-        let handler3 = TGMessageHandler(filters: .regexp(pattern: "2")) {update, bot in
+        let handler3 = TGMessageHandler(filters: .regexp(pattern: "^2$")) {update, bot in
             try update.message?.reply(text: "2. Следующие ваши сообщения будут обязательно рассмотрены и приняты ! 😇", bot: bot)
         }
-        let handler9 = TGMessageHandler(filters: .regexp(pattern: "9")) {update, bot in
+        let handler9 = TGMessageHandler(filters: .regexp(pattern: "^9$")) {update, bot in
             try update.message?.reply(text: """
                                                                      1️⃣ Причина: ❌
 
@@ -135,7 +141,7 @@ final class DefaultBotHandlers {
 
 """, bot: bot)
         }
-        let handler11 = TGMessageHandler(filters: .regexp(pattern: "7")) {update, bot in
+        let handler11 = TGMessageHandler(filters: .regexp(pattern: "^7$")) {update, bot in
             try update.message?.reply(text: """
 7. Школьный Профориентатор
  - Айгерим Шаймерденова
@@ -172,7 +178,7 @@ https://calendly.com/a-shajmerdenova/onsultation-with-a-career-counselor
 
 
 """, bot: bot)}
-        let handler8 = TGMessageHandler(filters: .regexp(pattern: "6")) {update, bot in
+        let handler8 = TGMessageHandler(filters: .regexp(pattern: "^6%")) {update, bot in
             try update.message?.reply(text: """
 6.  Амирлан Кайнарбеков (президент)
 @memerlain
@@ -205,7 +211,7 @@ https://calendly.com/a-shajmerdenova/onsultation-with-a-career-counselor
 @darinayerlan
 
 """, bot: bot)}
-        let handler5 = TGMessageHandler(filters: .regexp(pattern: "4")) {update, bot in
+        let handler5 = TGMessageHandler(filters: .regexp(pattern: "^4$")) {update, bot in
             try update.message?.reply(text: """
 5.1 ORNEKDIY 🎀
 
@@ -295,7 +301,7 @@ https://calendly.com/a-shajmerdenova/onsultation-with-a-career-counselor
 
 """, bot: bot)}
      
-        let handler15 = TGMessageHandler(filters: .regexp(pattern: "3")) {update, bot in
+        let handler15 = TGMessageHandler(filters: .regexp(pattern: "^3$")) {update, bot in
             if let id = update.message?.chat.id {
                 let chatId: TGChatId = .chat(id)
                 let file: TGFileInfo = .url("https://imgur.com/a/mFDSsVH")
@@ -386,7 +392,7 @@ https://calendly.com/a-shajmerdenova/onsultation-with-a-career-counselor
 Другие экзамены, разработанные и проведенные учителями Интеллектуальных школ, будут относиться к формативному и внутреннему суммативному оцениваниям.
 
 """, bot: bot)}
-        let handler6 = TGMessageHandler(filters: .regexp(pattern: "5")) {update, bot in
+        let handler6 = TGMessageHandler(filters: .regexp(pattern: "^5$")) {update, bot in
             try update.message?.reply(text: """
 5. Задача Парламента заключается в том, что данный орган будучи независимым от министров и Президента играет роль противовеса.
 
