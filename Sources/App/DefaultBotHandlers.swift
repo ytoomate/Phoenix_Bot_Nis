@@ -65,7 +65,7 @@ final class DefaultBotHandlers {
         
                  }
                  catch {
-                     print("Could not write to file")
+                     print("Something went worng:  \(error)")
                  }
             } else {
                 print("Error")
