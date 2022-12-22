@@ -9,7 +9,34 @@ import Foundation
 import Vapor
 import telegram_vapor_bot
 
+//MARK:- Extension for String
+extension String {
+    func appendLineToURL(fileURL: URL) throws {
+         try (self + "\n").appendToURL(fileURL: fileURL)
+     }
+
+     func appendToURL(fileURL: URL) throws {
+         let data = self.data(using: String.Encoding.utf8)!
+         try data.append(fileURL: fileURL)
+     }
+ }
+//MARK:- Extension for File data
+extension Data {
+    func append(fileURL: URL) throws {
+        if let fileHandle = FileHandle(forWritingAtPath: fileURL.path) {
+            defer {
+                fileHandle.closeFile()
+            }
+            fileHandle.seekToEndOfFile()
+            fileHandle.write(self)
+        }
+        else {
+            try write(to: fileURL, options: .atomic)
+        }
+    }
+}
 final class DefaultBotHandlers {
+    
     
     static func addHandlers(app: Vapor.Application, bot: TGBotPrtcl) {
         defaultHandler(app: app, bot: bot)
@@ -28,11 +55,22 @@ final class DefaultBotHandlers {
             format.dateStyle = .short
             
             
+          
             if update.message?.text != nil {
-                print("\(format.string(from: date)); litl nis bot:   \(update.message?.text ?? "Error")")
+               // print("\(format.string(from: date)); litl nis bot:   \(update.message?.text ?? "Error")")
+                do {
+                    let dir: URL = FileManager.default.urls(for: .desktopDirectory, in: .userDomainMask).last! as URL
+                     let url = dir.appendingPathComponent("logFile.txt")
+                     try "\(format.string(from: date)); litl nis bot:   \(update.message?.text ?? "Error")".appendLineToURL(fileURL: url as URL)
+        
+                 }
+                 catch {
+                     print("Could not write to file")
+                 }
             } else {
                 print("Error")
             }
+            
         }
         bot.connection.dispatcher.add(handler)
         
@@ -45,6 +83,7 @@ final class DefaultBotHandlers {
 
 Я Телеграм-Бот самоуправления НИШ Талдыкорган.
 
+Можете использовать меня как центральную почту!
 
 Я могу ответить на любые интересующие вас вопросы, выберите что вы хотите спросить:
 
