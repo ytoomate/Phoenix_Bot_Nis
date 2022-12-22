@@ -178,7 +178,7 @@ https://calendly.com/a-shajmerdenova/onsultation-with-a-career-counselor
 
 
 """, bot: bot)}
-        let handler8 = TGMessageHandler(filters: .regexp(pattern: "^6%")) {update, bot in
+        let handler8 = TGMessageHandler(filters: .regexp(pattern: "^6$")) {update, bot in
             try update.message?.reply(text: """
 6.  Амирлан Кайнарбеков (президент)
 @memerlain
