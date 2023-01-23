@@ -86,7 +86,7 @@ final class DefaultBotHandlers {
     private static func commandPingHandler(app: Vapor.Application, bot: TGBotPrtcl) {
         let handler = TGCommandHandler(commands: ["/start"]) { update, bot in
             try update.message?.reply(text: """
-Приветствую вас ! 🙋‍♂️
+Приветствую вас, \(update.message?.from?.firstName ?? "anonymous") ! 🙋‍♂️
 
 Я Телеграм-Бот самоуправления НИШ Талдыкорган.
 
@@ -364,14 +364,17 @@ https://calendly.com/a-shajmerdenova/onsultation-with-a-career-counselor
                 let file: TGFileInfo = .url("https://imgur.com/a/mFDSsVH")
                 let params: TGSendPhotoParams = .init(chatId: chatId, photo: file)
                 try bot.sendPhoto(params: params)
+                try update.message?.reply(text: "Структура Самоуправления.", bot: bot)
             }
         }
+
         let handlerArnie = TGMessageHandler(filters: .regexp(pattern: "Арнур гений")) {update, bot in
             if let id = update.message?.chat.id {
                 let chatId: TGChatId = .chat(id)
                 let file: TGFileInfo = .url("https://imgur.com/a/9MPSas0")
                 let params: TGSendPhotoParams = .init(chatId: chatId, photo: file)
                 try bot.sendPhoto(params: params)
+                try update.message?.reply(text: "салам", bot: bot)
             }
         }
         let handlerPorn = TGMessageHandler(filters: .regexp(pattern: "Порно")) {update, bot in
@@ -457,6 +460,27 @@ https://calendly.com/a-shajmerdenova/onsultation-with-a-career-counselor
 
 Так же, поскольку Парламент состоит из лидеров классов, он является репрезентативным органом который отражает мнение, просьбы и предложения школьного сообщества.
 """, bot: bot)}
+//        let handler16 = TGMessageHandler(filters: .regexp(pattern: "^11$")) {update, bot in
+//            let fileManager = FileManager.default
+//
+//            let path = fileManager.currentDirectoryPath
+//            let currentDir = URL(fileURLWithPath: path, isDirectory: true)
+//            let fileUrl = URL(fileURLWithPath: "Копия tarih мэск.docx", relativeTo: currentDir)
+//
+//            var data: Data
+//                do {
+//                    let data = try Data(contentsOf: fileUrl)
+//                } catch{
+//                    print(error)
+//                }
+//
+//                let tgInputFile = TGInputFile(filename: "Копия tarih мэск.docx", data: data, mimeType: "application/docx") //file info
+//                let tgFileInfo = TGFileInfo.file(tgInputFile)
+//                let chatId: TGChatId = Int(.chat(id))
+//                let tgSendDocumentParams = TGSendDocumentParams(chatId: chatId, document: tgFileInfo)
+//
+//                bot.sendDocument(params: tgSendDocumentParams)
+//            }
         
         bot.connection.dispatcher.add(handler)
         bot.connection.dispatcher.add(handler3)
@@ -471,30 +495,31 @@ https://calendly.com/a-shajmerdenova/onsultation-with-a-career-counselor
         bot.connection.dispatcher.add(handlerArnie)
         bot.connection.dispatcher.add(handlerPorn)
         bot.connection.dispatcher.add(handlerPorn1)
+     //   bot.connection.dispatcher.add(handler16)
     }
 
     private static func commandShowButtonsHandler(app: Vapor.Application, bot: TGBotPrtcl) {
-        let handler = TGCommandHandler(commands: ["/show_buttons"]) { update, bot in
+        let handler = TGCommandHandler(commands: ["/buttons"]) { update, bot in
             guard let userId = update.message?.from?.id else { fatalError("user id not found") }
             let buttons: [[TGInlineKeyboardButton]] = [
-                [.init(text: "Button 1", callbackData: "press 1"), .init(text: "Button 2", callbackData: "press 2")]
+                [.init(text: "Материалы по подготовке Мэск", callbackData: "Мэск"), .init(text: "Button 2", callbackData: "press 2")]
             ]
             let keyboard: TGInlineKeyboardMarkup = .init(inlineKeyboard: buttons)
-            let params: TGSendMessageParams = .init(chatId: .chat(userId),
-                                                    text: "Keyboard active",
-                                                    replyMarkup: .inlineKeyboardMarkup(keyboard))
+            let params: TGSendMessageParams = .init(chatId: .chat(userId), text: "Next:", replyMarkup: .inlineKeyboardMarkup(keyboard))
             try bot.sendMessage(params: params)
         }
         bot.connection.dispatcher.add(handler)
     }
 
     private static func buttonsActionHandler(app: Vapor.Application, bot: TGBotPrtcl) {
-        let handler = TGCallbackQueryHandler(pattern: "press 1") { update, bot in
+        let handler = TGCallbackQueryHandler(pattern: "Мэск") { update, bot in
+            
             let params: TGAnswerCallbackQueryParams = .init(callbackQueryId: update.callbackQuery?.id ?? "0",
                                             text: update.callbackQuery?.data  ?? "data not exist",
                                                             showAlert: nil,
                                                             url: nil,
                                                             cacheTime: nil)
+                try update.message?.reply(text: "2. Следующие ваши сообщения будут обязательно рассмотрены и приняты ! 😇", bot: bot)
             try bot.answerCallbackQuery(params: params)
         }
 

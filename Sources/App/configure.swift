@@ -9,7 +9,7 @@ public func configure(_ app: Application) throws {
    // app.http.server.configuration.hostname = "0.0.0.0"
 // app.http.server.configuration.port = 80
     
-    let tgApi: String = "5950490468:AAFySzLbIuLvtTR9AfEfngaheNELYe61E48"
+    let tgApi: String = "5951973965:AAEMXR0lBME7ZAs6juVZUyoe9rBeiNNrD48"
     let connection: TGConnectionPrtcl = TGLongPollingConnection()
     TGBot.configure(connection: connection, botId: tgApi, vaporClient: app.client)
     try TGBot.shared.start()
