@@ -115,7 +115,7 @@ final class DefaultBotHandlers {
 """, bot: bot)}
         let handlerBella = TGMessageHandler(filters: .regexp(pattern: "/start")) {update, bot in
             try update.message?.reply(text: """
-Материалы по подготовке экзаменам: SAT 🇺🇸 x IELTS 📚   🧞‍♂️
+Материалы по подготовке к экзаменам: SAT 🇺🇸 x IELTS 📚   🧞‍♂️
  👇
 @Bellanicas_bot
 """, bot: bot)
