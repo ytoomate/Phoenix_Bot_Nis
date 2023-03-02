@@ -187,28 +187,28 @@ https://calendly.com/a-shajmerdenova/onsultation-with-a-career-counselor
 """, bot: bot)}
         let handler8 = TGMessageHandler(filters: .regexp(pattern: "^6$")) {update, bot in
             try update.message?.reply(text: """
-6.  Амирлан Кайнарбеков (президент)
+6.  Амирлан Қайнарбеков (президент)
 @memerlain
 
 Әбілмәжін Аяулым (вице-президент)
 @meowayau
     
-Алишер Бекмустафаев (спикер парламента)
-@sher_fon_gertzen
+Бибатыр Ардана (спикер парламента)
+@ardankka
     
-Емберген Арнур (премьер-министр)
-@arnie808
+Емберген Арнұр (премьер-министр)
+@glaco808
     
 Шылбы Жания (министр культуры)
 @zhaneeek
     
-Әбділдің Әмір (министр образования)
-@notamirabdildin
+Даулетқызы Сымбат (министр образования)
+@d_Symbat
     
 Курманбаева Инкар (медиа министр)
 @kuramokadze
     
-Дунгенбай Ерали (министр спорта)
+Дүнгенбай Ерали (министр спорта)
 @yeerali
     
 Садыкова Рамиля (министр внутр. дел)
