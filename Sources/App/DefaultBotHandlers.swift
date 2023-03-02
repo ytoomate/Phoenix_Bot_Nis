@@ -188,7 +188,7 @@ https://calendly.com/a-shajmerdenova/onsultation-with-a-career-counselor
         let handler8 = TGMessageHandler(filters: .regexp(pattern: "^6$")) {update, bot in
             try update.message?.reply(text: """
 6.  Амирлан Қайнарбеков (президент)
-@memerlain
+@memerla1n
 
 Әбілмәжін Аяулым (вице-президент)
 @meowayau
@@ -203,7 +203,7 @@ https://calendly.com/a-shajmerdenova/onsultation-with-a-career-counselor
 @zhaneeek
     
 Даулетқызы Сымбат (министр образования)
-@d_Symbat
+@d_symbat
     
 Курманбаева Инкар (медиа министр)
 @kuramokadze
